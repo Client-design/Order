@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed Successfully</title>
+    <style>
+        /* CSS for the page layout and styling */
+        :root {
+            --flipkart-blue: #2874F0;
+            --success-green: #388E3C;
+            --border-gray: #E0E0E0;
+            --text-color: #212121;
+            --light-bg: #F1F3F6;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            margin-bottom: 50px;
+        }
+
+        /* --- Header Section (Order Status) --- */
+        .order-status-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-gray);
+            background-color: #fff;
+        }
+
+        .success-icon {
+            color: var(--success-green);
+            font-size: 30px;
+            margin-right: 15px;
+            /* Using a simple checkmark symbol */
+        }
+
+        .header-text h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--success-green);
+        }
+
+        .header-text p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #757575;
+        }
+
+        /* --- Main Content --- */
+        .order-details {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .detail-info {
+            width: 60%;
+        }
+
+        .detail-info h3 {
+            font-size: 16px;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-gray);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .detail-info p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .detail-info strong {
+            color: var(--text-color);
+        }
+
+        /* --- Action Button --- */
+        .action-area {
+            width: 35%;
+            text-align: center;
+            border-left: 1px solid var(--border-gray);
+            padding-left: 20px;
+        }
+
+        .home-button {
+            background-color: var(--flipkart-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background-color 0.2s;
+            text-decoration: none; /* In case it's an <a> tag */
+            display: inline-block;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #1A5CB6;
+        }
+        
+        /* --- Internadda Ad (Small and Genuine-looking) --- */
+        .internadda-ad {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #F8F8F8;
+            border: 1px solid var(--border-gray);
+            border-radius: 2px;
+            text-align: left;
+        }
+
+        .internadda-ad h4 {
+            margin-top: 0;
+            font-size: 14px;
+            color: var(--flipkart-blue);
+            font-weight: 600;
+        }
+
+        .internadda-ad p {
+            font-size: 12px;
+            color: #616161;
+            margin: 5px 0;
+        }
+
+        .ad-link {
+            color: var(--flipkart-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .ad-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 600px) {
+            .order-details {
+                flex-direction: column;
+            }
+
+            .detail-info, .action-area {
+                width: 100%;
+                padding-left: 0;
+                border-left: none;
+            }
+
+            .action-area {
+                margin-top: 20px;
+                padding-top: 20px;
+                border-top: 1px solid var(--border-gray);
+            }
+
+            .home-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="order-status-header">
+            <span class="success-icon">&#10003;</span>
+            <div class="header-text">
+                <h2>ORDER PLACED SUCCESSFULLY</h2>
+                <p>Thank you for your order. We've sent an order confirmation email to example@email.com.</p>
+            </div>
+        </div>
+        
+        <div class="order-details">
+            
+            <div class="detail-info">
+                <h3>Delivery Details</h3>
+                <p>
+                    <strong>Estimated Delivery:</strong> Monday, 5th December, 2025<br>
+                    <strong>Shipping Address:</strong> 123, Sample Street, Near Sample Park, New Delhi - 110001<br>
+                    <strong>Payment Method:</strong> Prepaid (Credit Card ending in **9012)<br>
+                    <strong>Order ID:</strong> OD1234567890
+                </p>
+            </div>
+
+            <div class="action-area">
+                <button class="home-button" onclick="goToHome()">GO TO HOME PAGE</button>
+
+                <div class="internadda-ad">
+                    <h4>🚀 Kickstart Your Career!</h4>
+                    <p>Find the best internships and remote work opportunities tailored for students.</p>
+                    <a href="https://www.internadda.com" target="_blank" class="ad-link">Explore Internships on Internadda ></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for the "Go to Home" button redirection
+        function goToHome() {
+            // Redirects the user to the specified URL
+            window.location.href = "https://www.internadda.com";
+        }
+    </script>
+</body>
+</html>
