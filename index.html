@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Placed Successfully</title>
+    <title>Order Confirmed - Awesome!</title>
     <style>
-        /* CSS for the page layout and styling */
+        /* Define Colors and Variables */
         :root {
             --flipkart-blue: #2874F0;
             --success-green: #388E3C;
@@ -14,6 +14,7 @@
             --light-bg: #F1F3F6;
         }
 
+        /* Basic Setup and Background */
         body {
             font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
@@ -21,160 +22,215 @@
             background-color: var(--light-bg);
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             min-height: 100vh;
-            padding-top: 50px;
+            perspective: 1000px; /* For 3D transformations */
         }
 
+        /* Keyframes for Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(56, 142, 60, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(56, 142, 60, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(56, 142, 60, 0);
+            }
+        }
+
+        /* Main Container Styling */
         .container {
             width: 90%;
-            max-width: 800px;
+            max-width: 900px;
             background-color: #fff;
-            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
-            margin-bottom: 50px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
         }
 
-        /* --- Header Section (Order Status) --- */
+        /* --- Header Section (Status and Icon) --- */
         .order-status-header {
             display: flex;
             align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid var(--border-gray);
-            background-color: #fff;
+            padding: 25px 30px;
+            background-color: #E8F5E9; /* Very light green for success feel */
         }
 
-        .success-icon {
-            color: var(--success-green);
+        .success-icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--success-green);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
             font-size: 30px;
-            margin-right: 15px;
-            /* Using a simple checkmark symbol */
+            animation: pulse 1.5s infinite;
         }
 
         .header-text h2 {
             margin: 0;
-            font-size: 24px;
-            font-weight: 500;
+            font-size: 26px;
+            font-weight: 700;
             color: var(--success-green);
         }
 
         .header-text p {
             margin: 5px 0 0 0;
-            font-size: 14px;
-            color: #757575;
+            font-size: 15px;
+            color: #555;
+        }
+        
+        /* --- Content Layout --- */
+        .content-body {
+            display: flex;
         }
 
-        /* --- Main Content --- */
-        .order-details {
-            padding: 20px;
+        .details-panel {
+            flex: 2;
+            padding: 30px;
+        }
+
+        .sidebar-panel {
+            flex: 1;
+            padding: 30px;
+            background-color: var(--light-bg);
+            border-left: 1px solid var(--border-gray);
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: space-between;
         }
 
-        .detail-info {
-            width: 60%;
-        }
-
-        .detail-info h3 {
-            font-size: 16px;
+        /* --- Details Info --- */
+        .detail-group h3 {
+            font-size: 18px;
             color: var(--text-color);
-            border-bottom: 1px solid var(--border-gray);
+            border-bottom: 2px solid var(--border-gray);
             padding-bottom: 10px;
             margin-bottom: 15px;
+            font-weight: 500;
         }
 
-        .detail-info p {
-            font-size: 14px;
+        .detail-item {
+            font-size: 15px;
             color: #555;
-            line-height: 1.6;
+            line-height: 1.8;
+            margin-bottom: 5px;
         }
 
-        .detail-info strong {
+        .detail-item strong {
             color: var(--text-color);
+            display: inline-block;
+            min-width: 150px; /* Align the values */
         }
-
-        /* --- Action Button --- */
-        .action-area {
-            width: 35%;
-            text-align: center;
-            border-left: 1px solid var(--border-gray);
-            padding-left: 20px;
-        }
-
+        
+        /* --- Sidebar Action Button --- */
         .home-button {
             background-color: var(--flipkart-blue);
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            font-weight: 500;
+            padding: 15px 30px;
+            font-size: 17px;
+            font-weight: 600;
             cursor: pointer;
-            border-radius: 2px;
-            transition: background-color 0.2s;
-            text-decoration: none; /* In case it's an <a> tag */
-            display: inline-block;
-            width: 80%;
-            margin-top: 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s, transform 0.1s;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
         }
 
         .home-button:hover {
             background-color: #1A5CB6;
+            transform: scale(1.02);
         }
         
-        /* --- Internadda Ad (Small and Genuine-looking) --- */
+        /* --- Internadda Ad Panel --- */
         .internadda-ad {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #F8F8F8;
-            border: 1px solid var(--border-gray);
-            border-radius: 2px;
-            text-align: left;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid var(--flipkart-blue);
+            border-radius: 4px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .internadda-ad:hover {
+            transform: translateY(-5px);
+        }
+
+        .internadda-logo {
+            width: 120px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 10px;
         }
 
         .internadda-ad h4 {
             margin-top: 0;
-            font-size: 14px;
+            font-size: 16px;
             color: var(--flipkart-blue);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .internadda-ad p {
-            font-size: 12px;
+            font-size: 13px;
             color: #616161;
-            margin: 5px 0;
+            margin: 5px 0 15px 0;
         }
 
         .ad-link {
             color: var(--flipkart-blue);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--flipkart-blue);
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: inline-block;
         }
 
         .ad-link:hover {
-            text-decoration: underline;
+            background-color: var(--flipkart-blue);
+            color: white;
         }
 
-        /* --- Responsive Adjustments --- */
-        @media (max-width: 600px) {
-            .order-details {
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .content-body {
                 flex-direction: column;
             }
 
-            .detail-info, .action-area {
+            .details-panel, .sidebar-panel {
+                flex: none;
                 width: 100%;
-                padding-left: 0;
                 border-left: none;
             }
 
-            .action-area {
-                margin-top: 20px;
-                padding-top: 20px;
+            .sidebar-panel {
                 border-top: 1px solid var(--border-gray);
-            }
-
-            .home-button {
-                width: 100%;
             }
         }
     </style>
@@ -184,32 +240,54 @@
     <div class="container">
         
         <div class="order-status-header">
-            <span class="success-icon">&#10003;</span>
+            <div class="success-icon-wrapper">
+                &#10003;
+            </div>
             <div class="header-text">
                 <h2>ORDER PLACED SUCCESSFULLY</h2>
-                <p>Thank you for your order. We've sent an order confirmation email to example@email.com.</p>
+                <p>Thank you! Your order confirmation has been sent to your registered email.</p>
             </div>
         </div>
         
-        <div class="order-details">
+        <div class="content-body">
             
-            <div class="detail-info">
-                <h3>Delivery Details</h3>
-                <p>
-                    <strong>Estimated Delivery:</strong> Monday, 5th December, 2025<br>
-                    <strong>Shipping Address:</strong> 123, Sample Street, Near Sample Park, New Delhi - 110001<br>
-                    <strong>Payment Method:</strong> Prepaid (Credit Card ending in **9012)<br>
-                    <strong>Order ID:</strong> OD1234567890
-                </p>
+            <div class="details-panel">
+                
+                <div class="detail-group">
+                    <h3>Order & Time Details</h3>
+                    <div class="detail-item">
+                        <strong>Order ID:</strong> <span id="orderId">...</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Order Time:</strong> <span id="orderTime">...</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Order Date:</strong> <span id="orderDate">...</span>
+                    </div>
+                </div>
+
+                <div class="detail-group" style="margin-top: 30px;">
+                    <h3>Delivery & Payment</h3>
+                    <div class="detail-item">
+                        <strong>Estimated Delivery:</strong> **Wednesday, 7th December, 2025**
+                    </div>
+                    <div class="detail-item">
+                        <strong>Shipping Address:</strong> 404, Awesome Lane, Tech Hub Road, Pune - 411001
+                    </div>
+                    <div class="detail-item">
+                        <strong>Payment Method:</strong> Prepaid (UPI transaction complete)
+                    </div>
+                </div>
             </div>
 
-            <div class="action-area">
+            <div class="sidebar-panel">
                 <button class="home-button" onclick="goToHome()">GO TO HOME PAGE</button>
 
                 <div class="internadda-ad">
-                    <h4>🚀 Kickstart Your Career!</h4>
-                    <p>Find the best internships and remote work opportunities tailored for students.</p>
-                    <a href="https://www.internadda.com" target="_blank" class="ad-link">Explore Internships on Internadda ></a>
+                    <img src="logo.jpg" alt="Internadda Logo" class="internadda-logo">
+                    <h4>Unlock Your Future with Internadda</h4>
+                    <p>Find the best internships, remote jobs, and career guidance tailored for ambitious students.</p>
+                    <a href="https://www.internadda.com" target="_blank" class="ad-link">Explore Now!</a>
                 </div>
             </div>
 
@@ -217,11 +295,43 @@
     </div>
 
     <script>
-        // JavaScript for the "Go to Home" button redirection
+        // --- JavaScript for Dynamic Content and Redirection ---
+
+        // 1. Function to Generate Random Order ID
+        function generateOrderId() {
+            // Generates a 12-character alphanumeric code, starting with 'OD'
+            const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let result = 'OD';
+            for (let i = 0; i < 10; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        // 2. Function to Get Current Date and Time
+        function setOrderTimeAndDate() {
+            const now = new Date();
+            
+            // Time (e.g., 03:08:34 PM IST)
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const timeString = now.toLocaleTimeString('en-US', timeOptions) + ' ' + Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            // Date (e.g., Tuesday, 2 December 2025)
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('en-US', dateOptions);
+
+            document.getElementById('orderId').textContent = generateOrderId();
+            document.getElementById('orderTime').textContent = timeString;
+            document.getElementById('orderDate').textContent = dateString;
+        }
+
+        // 3. Redirection Function
         function goToHome() {
-            // Redirects the user to the specified URL
             window.location.href = "https://www.internadda.com";
         }
+
+        // Execute dynamic content generation when the page loads
+        document.addEventListener('DOMContentLoaded', setOrderTimeAndDate);
     </script>
 </body>
 </html>
