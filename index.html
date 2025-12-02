@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmed - Awesome!</title>
+    <title>Order Confirmed - Premium Experience</title>
     <style>
         /* Define Colors and Variables */
         :root {
@@ -12,6 +12,7 @@
             --border-gray: #E0E0E0;
             --text-color: #212121;
             --light-bg: #F1F3F6;
+            --premium-gold: #FFD700; /* For a touch of high-end feel */
         }
 
         /* Basic Setup and Background */
@@ -24,7 +25,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            perspective: 1000px; /* For 3D transformations */
+            perspective: 1000px;
         }
 
         /* Keyframes for Animations */
@@ -59,8 +60,8 @@
             width: 90%;
             max-width: 900px;
             background-color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+            border-radius: 6px; /* Slightly more rounded */
             overflow: hidden;
             opacity: 0;
             animation: slideInUp 0.8s ease-out forwards;
@@ -71,7 +72,7 @@
             display: flex;
             align-items: center;
             padding: 25px 30px;
-            background-color: #E8F5E9; /* Very light green for success feel */
+            background-color: #E8F5E9;
         }
 
         .success-icon-wrapper {
@@ -142,7 +143,24 @@
         .detail-item strong {
             color: var(--text-color);
             display: inline-block;
-            min-width: 150px; /* Align the values */
+            min-width: 150px;
+        }
+
+        /* New Premium Message Styling */
+        .premium-message {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #FFFDE7; /* Light yellow background */
+            border-left: 5px solid var(--premium-gold);
+            border-radius: 4px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #616161;
+        }
+
+        .premium-message strong {
+            color: var(--text-color);
+            font-weight: 700;
         }
         
         /* --- Sidebar Action Button --- */
@@ -183,7 +201,7 @@
         }
 
         .internadda-logo {
-            width: 120px; /* Adjust size as needed */
+            width: 120px;
             height: auto;
             margin-bottom: 10px;
         }
@@ -254,7 +272,7 @@
             <div class="details-panel">
                 
                 <div class="detail-group">
-                    <h3>Order & Time Details</h3>
+                    <h3>Order Confirmation Summary</h3>
                     <div class="detail-item">
                         <strong>Order ID:</strong> <span id="orderId">...</span>
                     </div>
@@ -264,19 +282,20 @@
                     <div class="detail-item">
                         <strong>Order Date:</strong> <span id="orderDate">...</span>
                     </div>
+                    <div class="detail-item">
+                        <strong>Estimated Delivery:</strong> <strong>Wednesday, 7th December, 2025</strong>
+                    </div>
                 </div>
 
-                <div class="detail-group" style="margin-top: 30px;">
-                    <h3>Delivery & Payment</h3>
-                    <div class="detail-item">
-                        <strong>Estimated Delivery:</strong> **Wednesday, 7th December, 2025**
-                    </div>
-                    <div class="detail-item">
-                        <strong>Shipping Address:</strong> 404, Awesome Lane, Tech Hub Road, Pune - 411001
-                    </div>
-                    <div class="detail-item">
-                        <strong>Payment Method:</strong> Prepaid (UPI transaction complete)
-                    </div>
+                <div class="premium-message">
+                    <p>
+                        As our <strong>valued customer</strong>, we assure you of a seamless experience. 
+                        We are processing your high-priority order and guarantee prompt dispatch from our nearest premium fulfillment center. 
+                        You can view your order status anytime in the "My Orders" section.
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        Thank you for choosing a <strong>superior shopping experience.</strong>
+                    </p>
                 </div>
             </div>
 
@@ -312,11 +331,13 @@
         function setOrderTimeAndDate() {
             const now = new Date();
             
-            // Time (e.g., 03:08:34 PM IST)
+            // Time (e.g., 03:11:53 PM IST)
             const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-            const timeString = now.toLocaleTimeString('en-US', timeOptions) + ' ' + Intl.DateTimeFormat().resolvedOptions().timeZone;
+            // Get the current time zone string (e.g., IST)
+            const timeZoneString = Intl.DateTimeFormat().resolvedOptions().timeZone.split('/').pop().replace('_', ' ');
+            const timeString = now.toLocaleTimeString('en-US', timeOptions) + ' ' + timeZoneString;
             
-            // Date (e.g., Tuesday, 2 December 2025)
+            // Date (e.g., Tuesday, December 2, 2025)
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const dateString = now.toLocaleDateString('en-US', dateOptions);
 
